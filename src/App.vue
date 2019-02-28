@@ -1,17 +1,22 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <BaseForm/>
+    <CurrencyRateCard v-for="(item, index) in [1,2]" :key="index"/>
+    <CurrencyOptions/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import BaseForm from './components/BaseForm.vue';
+import CurrencyRateCard from './components/CurrencyRateCard.vue';
+import CurrencyOptions from './components/CurrencyOptions.vue'
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    BaseForm,
+    CurrencyRateCard,
+    CurrencyOptions
   }
 }
 </script>
@@ -21,8 +26,17 @@ export default {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin: 30px auto;
+
+  // Style app to be mobile-like display
+  width: 270px;
+}
+
+.flex{
+  display: flex;
+  &.justify-content-between{
+    justify-content: space-between
+  }
 }
 </style>
