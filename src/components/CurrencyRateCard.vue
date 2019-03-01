@@ -3,14 +3,11 @@
         <div class="flex justify-content-between">
             <div class="card--content">
                 <div class="flex justify-content-between">
-                    <b>IDR</b>
-                    <span>144,151</span>
+                    <b>{{rate.symbol}}</b>
+                    <span>{{floatedRate.multipliedByBaseRate}}</span>
                 </div>
                 <div>
-                    <i>IDR - Indonesia Rupiah</i> 
-                </div>
-                <div>
-                    <i>1 USD = IDR 15.000</i> 
+                    <i>1 USD = {{rate.symbol}} {{floatedRate.rate}}</i> 
                 </div>
             </div>
             <button class="card--close">
@@ -20,8 +17,18 @@
     </div>
 </template>
 <script>
+
 export default {
-    name: "CurrencyRateCard"
+    name: "CurrencyRateCard",
+    props: ['rate'],
+    computed: {
+        floatedRate: function(){
+            return { 
+                rate: parseFloat(this.rate.rate).toFixed(2),
+                multipliedByBaseRate: parseFloat(this.rate.multipliedByBaseRate).toFixed(2)
+            }
+        }
+    }
 }
 </script>
 <style lang="scss" scoped>

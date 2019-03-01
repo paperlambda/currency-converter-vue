@@ -19,7 +19,7 @@ export default {
     components: { Money },
     data(){
         return {
-            baseRate: 10.00,
+            // baseRate: 10.00,
             money: {
                 precision: 2,
                 masked: false,
@@ -32,9 +32,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    form{
-        border-bottom: 1px solid #cccccc;
-        padding-bottom: 8px;
-        margin-bottom: 12px;
-    }
 </style>

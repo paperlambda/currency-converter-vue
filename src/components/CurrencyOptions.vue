@@ -1,7 +1,7 @@
 <template>
     <div>
         <select>
-            <option value="">JPY</option>
+            <option>+ Add More Currencies</option>
         </select>
     </div>
 </template>
