@@ -10,7 +10,7 @@
         </div>
     </form>
     <CurrencyRateCard v-on:remove-rate="removeRate" v-for="(item, index) in displayedRates" :rate="item" :key="index"/>
-    <CurrencyOptions/>
+    <CurrencyOptions :currencies="currencyOptions"/>
   </div>
 </template>
 
@@ -38,6 +38,7 @@ export default {
           thousand: '.',
           decimal: ','
       },
+      currencyOptions: [],
       baseRate: 10.00
     }
   },
@@ -53,12 +54,13 @@ export default {
     removeRate(symbol){
       let findRateBySymbol = this.displayedCurrencies.indexOf(symbol);
       this.displayedCurrencies.splice(findRateBySymbol, 1);
-      this.displayedRates = this.filterRates(this.allRates)
+
+      this.displayedRates = this.getFilteredRates(this.allRates)
     },
     calculateFromBaseRate(value){
       return (value * this.baseRate)
     },
-    filterRates(rates){
+    getFilteredRates(rates){
       let symbols = this.displayedCurrencies,
           filteredRates = [];
 
@@ -80,8 +82,19 @@ export default {
         .then(response => response.json())
         .then(data => {
           this.allRates = data.rates;
-          this.displayedRates = this.filterRates(data.rates);
+          this.displayedRates = this.getFilteredRates(data.rates);
+          this.setCurrencyOptions(data.rates);
         })
+    },
+    setCurrencyOptions(rates){
+      let symbols = this.displayedCurrencies;
+
+      let excludeDisplayedCurrency = Object.keys(rates).filter(rate => {
+        if(symbols.indexOf(rate) === -1){
+          return rate;
+        }
+      })
+      this.currencyOptions = excludeDisplayedCurrency;
     }
   }
 }
