@@ -9,7 +9,7 @@
             </div>
         </div>
     </form>
-    <CurrencyRateCard v-for="(item, index) in displayedRates" v-bind:rate="item" :key="index"/>
+    <CurrencyRateCard v-on:remove-rate="removeRate" v-for="(item, index) in displayedRates" :rate="item" :key="index"/>
     <CurrencyOptions/>
   </div>
 </template>
@@ -29,44 +29,7 @@ export default {
   },
   data(){
     return {
-      displayedCurrencies: [
-        {
-          symbol: 'CAD',
-          label: 'Canadian dollar'
-        },
-        {
-          symbol: 'IDR',
-          label: 'Indonesian rupiah'
-        },
-        {
-          symbol: 'GBP',
-          label: 'Great Britain pound'
-        },
-        {
-          symbol: 'CHF',
-          label: 'Swiss franc'
-        },
-        {
-          symbol: 'SGD',
-          label: 'Singaporean dollar',
-        },
-        {
-          symbol: 'INR',
-          label: 'Indian rupee'
-        },
-        {
-          symbol: 'MYR',
-          label: 'Malaysian ringgit'
-        },
-        {
-          symbol: 'JPY',
-          label: 'Japanese yen'
-        },
-        {
-          symbol: 'KRW',
-          label: 'South Korean won'
-        }
-      ],
+      displayedCurrencies: ['CAD', 'IDR', 'GBP', 'CHF', 'SGD', 'INR', 'MYR', 'JPY', 'KRW'],
       displayedRates: [],
       allRates: [],
       money: {
@@ -87,11 +50,16 @@ export default {
     }
   },
   methods: {
+    removeRate(symbol){
+      let findRateBySymbol = this.displayedCurrencies.indexOf(symbol);
+      this.displayedCurrencies.splice(findRateBySymbol, 1);
+      this.displayedRates = this.filterRates(this.allRates)
+    },
     calculateFromBaseRate(value){
       return (value * this.baseRate)
     },
     filterRates(rates){
-      let symbols = this.displayedCurrencies.map(({symbol}) => symbol),
+      let symbols = this.displayedCurrencies,
           filteredRates = [];
 
       // Filter rates to be displayed

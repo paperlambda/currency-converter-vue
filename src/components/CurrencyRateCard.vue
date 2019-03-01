@@ -10,7 +10,7 @@
                     <i>1 USD = {{rate.symbol}} {{floatedRate.rate}}</i> 
                 </div>
             </div>
-            <button class="card--close">
+            <button v-on:click="$emit('remove-rate', rate.symbol)" class="card--close">
                 &minus;
             </button>
         </div>
