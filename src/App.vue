@@ -9,6 +9,8 @@
 <script>
 import { Money } from 'v-money';
 
+import { getRatesAPI } from  './services/currency-service.js';
+
 import CurrencyRateCard from './components/CurrencyRateCard.vue';
 import CurrencyOptions from './components/CurrencyOptions.vue';
 import BaseForm from './components/BaseForm.vue';
@@ -26,12 +28,6 @@ export default {
       displayedCurrencies: ['CAD', 'IDR', 'GBP', 'CHF', 'SGD', 'INR', 'MYR', 'JPY', 'KRW'],
       displayedRates: [],
       allRates: [],
-      money: {
-          precision: 2,
-          masked: false,
-          thousand: '.',
-          decimal: ','
-      },
       currencyOptions: []
     }
   },
@@ -64,8 +60,7 @@ export default {
       return filteredRates;
     },
     fetchRates(baseRate = 10.00){
-      fetch('https://api.exchangeratesapi.io/latest?base=USD')
-        .then(response => response.json())
+      getRatesAPI()
         .then(data => {
           this.allRates = data.rates;
           this.displayedRates = this.getFilteredRates(data.rates, baseRate);
