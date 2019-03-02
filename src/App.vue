@@ -10,7 +10,7 @@
         </div>
     </form>
     <CurrencyRateCard v-on:remove-rate="removeRate" v-for="(item, index) in displayedRates" :rate="item" :key="index"/>
-    <CurrencyOptions :currencies="currencyOptions"/>
+    <CurrencyOptions v-on:add-currency="addDisplayedCurreny" :currencies="currencyOptions"/>
   </div>
 </template>
 
@@ -57,8 +57,8 @@ export default {
 
       this.displayedRates = this.getFilteredRates(this.allRates)
     },
-    calculateFromBaseRate(value){
-      return (value * this.baseRate)
+    countTotalRate(value){
+      return parseFloat(value * this.baseRate).toFixed(2)
     },
     getFilteredRates(rates){
       let symbols = this.displayedCurrencies,
@@ -69,8 +69,8 @@ export default {
         if(symbols.indexOf(key) !== -1){
           filteredRates.push({
             symbol: key,
-            rate: value,
-            multipliedByBaseRate: this.calculateFromBaseRate(value)
+            rate: parseFloat(value).toFixed(2),
+            total: this.countTotalRate(value)
           })
         }
       })
@@ -95,6 +95,10 @@ export default {
         }
       })
       this.currencyOptions = excludeDisplayedCurrency;
+    },
+    addDisplayedCurreny(currency){
+      this.displayedCurrencies.push(currency);
+      this.fetchRates()
     }
   }
 }

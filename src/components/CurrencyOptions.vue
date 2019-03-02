@@ -1,7 +1,7 @@
 <template>
     <div>
-        <select>
-            <option>+ Add More Currencies</option>
+        <select @change="$emit('add-currency', selected)" v-model="selected">
+            <option value="" disabled hidden>+ Add More Currencies</option>
             <option :value="item" v-for="(item, index) in currencies" :key="index">{{item}}</option>
         </select>
     </div>
@@ -9,7 +9,12 @@
 <script>
 export default {
     name: 'CurrencyOptions',
-    props: ['currencies']
+    props: ['currencies'],
+    data(){
+        return {
+            selected: ''
+        }
+    }
 }
 </script>
 <style lang="scss" scoped>

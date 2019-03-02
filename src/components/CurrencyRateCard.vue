@@ -4,10 +4,10 @@
             <div class="card--content">
                 <div class="flex justify-content-between">
                     <b>{{rate.symbol}}</b>
-                    <span>{{floatedRate.multipliedByBaseRate}}</span>
+                    <span>{{rate.total}}</span>
                 </div>
                 <div>
-                    <i>1 USD = {{rate.symbol}} {{floatedRate.rate}}</i> 
+                    <i>1 USD = {{rate.symbol}} {{rate.rate}}</i> 
                 </div>
             </div>
             <button v-on:click="$emit('remove-rate', rate.symbol)" class="card--close">
@@ -20,15 +20,7 @@
 
 export default {
     name: "CurrencyRateCard",
-    props: ['rate'],
-    computed: {
-        floatedRate: function(){
-            return { 
-                rate: parseFloat(this.rate.rate).toFixed(2),
-                multipliedByBaseRate: parseFloat(this.rate.multipliedByBaseRate).toFixed(2)
-            }
-        }
-    }
+    props: ['rate']
 }
 </script>
 <style lang="scss" scoped>
