@@ -1,7 +1,7 @@
 <template>
     <div>
         <select @change="$emit('add-currency', selected)" v-model="selected">
-            <option value="" disabled hidden>+ Add More Currencies</option>
+            <option value="" disabled selected>+ Add More Currencies</option>
             <option :value="item" v-for="(item, index) in currencies" :key="index">{{item}}</option>
         </select>
     </div>
@@ -13,6 +13,11 @@ export default {
     data(){
         return {
             selected: ''
+        }
+    },
+    watch: {
+        currencies: function(){
+            this.selected = '';
         }
     }
 }

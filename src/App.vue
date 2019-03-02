@@ -65,15 +65,24 @@ export default {
           filteredRates = [];
 
       // Filter rates to be displayed
-      Object.entries(rates).filter(([key, value]) => {
-        if(symbols.indexOf(key) !== -1){
-          filteredRates.push({
-            symbol: key,
-            rate: parseFloat(value).toFixed(2),
-            total: this.countTotalRate(value)
-          })
-        }
+      symbols.map(symbol => {
+        let findRate = rates[symbol];
+
+        filteredRates.push({
+          symbol,
+          rate: parseFloat(findRate).toFixed(2),
+          total: this.countTotalRate(findRate)
+        })
       })
+      // Object.entries(rates).filter(([key, value]) => {
+      //   if(symbols.indexOf(key) !== -1){
+      //     filteredRates.push({
+      //       symbol: key,
+      //       rate: parseFloat(value).toFixed(2),
+      //       total: this.countTotalRate(value)
+      //     })
+      //   }
+      // })
 
       return filteredRates;
     },
