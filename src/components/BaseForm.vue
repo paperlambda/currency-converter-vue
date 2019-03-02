@@ -1,14 +1,12 @@
 <template>
     <div>
-        <form>
-            <div>
-                <label><i>United States Dollar</i></label>
-                <div class="flex justify-content-between">
-                    <label>USD</label>
-                    <money v-model="baseRate" v-bind="money"></money>
-                </div>
+        <div class="form">
+            <label><i>United States Dollar</i></label>
+            <div class="flex justify-content-between">
+                <b>USD</b>
+                <money @change.native="$emit('change-base', baseRate)" v-model="baseRate" v-bind="money"></money>
             </div>
-        </form>
+        </div>
     </div>
 </template>
 <script>
@@ -19,7 +17,7 @@ export default {
     components: { Money },
     data(){
         return {
-            // baseRate: 10.00,
+            baseRate: 10.00,
             money: {
                 precision: 2,
                 masked: false,
@@ -32,4 +30,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+    .form{
+        border-bottom: 1px solid #cccccc;
+        padding-bottom: 8px;
+        margin-bottom: 12px;
+    }
 </style>
