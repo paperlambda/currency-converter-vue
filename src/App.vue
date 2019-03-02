@@ -60,16 +60,7 @@ export default {
           total: parseFloat(rateValue * baseRate).toFixed(2)
         })
       })
-      // Object.entries(rates).filter(([key, value]) => {
-      //   if(symbols.indexOf(key) !== -1){
-      //     filteredRates.push({
-      //       symbol: key,
-      //       rate: parseFloat(value).toFixed(2),
-      //       total: this.countTotalRate(value)
-      //     })
-      //   }
-      // })
-
+      
       return filteredRates;
     },
     fetchRates(baseRate = 10.00){
