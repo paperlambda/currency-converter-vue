@@ -25,7 +25,8 @@ export default {
       displayedCurrencies: ['CAD', 'IDR', 'GBP', 'CHF', 'SGD', 'INR', 'MYR', 'JPY', 'KRW'],
       displayedRates: [],
       allRates: [],
-      currencyOptions: []
+      currencyOptions: [],
+      baseRate: null
     }
   },
   created() {
@@ -56,7 +57,10 @@ export default {
       
       return filteredRates;
     },
-    fetchRates(baseRate = 10.00){
+    fetchRates(baseRate = this.baseRate){
+      // Store base rate for reference
+      this.baseRate = baseRate;
+
       getRatesAPI()
         .then(data => {
           this.allRates = data.rates;
