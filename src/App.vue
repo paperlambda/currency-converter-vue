@@ -7,8 +7,6 @@
 </template>
 
 <script>
-import { Money } from 'v-money';
-
 import { getRatesAPI } from  './services/currency-service.js';
 
 import CurrencyRateCard from './components/CurrencyRateCard.vue';
@@ -20,8 +18,7 @@ export default {
   components: {
     CurrencyRateCard,
     CurrencyOptions,
-    BaseForm,
-    Money
+    BaseForm
   },
   data(){
     return {
