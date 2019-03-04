@@ -1,5 +1,7 @@
 # currency-converter
 
+Currency converter using Vue.js. Exchange rates are provided by https://exchangeratesapi.io/.
+
 ## Project setup
 ```
 yarn install
